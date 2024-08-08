@@ -1,0 +1,41 @@
+{
+  "name" : "Financial-001",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::757266554727:role/service-role/AWSGlueServiceRole",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-757266554727-us-east-2/scripts/Financial-001.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-757266554727-us-east-2/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-757266554727-us-east-2/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1723110637309\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://srj-src-001/annual-enterprise-survey-2023-financial-year-provisional.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"Amazon S3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"year\",\"Type\":\"string\"},{\"Name\":\"industry_aggregation_nzsioc\",\"Type\":\"string\"},{\"Name\":\"industry_code_nzsioc\",\"Type\":\"string\"},{\"Name\":\"industry_name_nzsioc\",\"Type\":\"string\"},{\"Name\":\"units\",\"Type\":\"string\"},{\"Name\":\"variable_code\",\"Type\":\"string\"},{\"Name\":\"variable_name\",\"Type\":\"string\"},{\"Name\":\"variable_category\",\"Type\":\"string\"},{\"Name\":\"value\",\"Type\":\"string\"},{\"Name\":\"industry_code_anzsic06\",\"Type\":\"string\"}]}],\"Paths\":[\"s3://srj-src-001/annual-enterprise-survey-2023-financial-year-provisional.csv\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}},\"node-1723111034658\":{\"ApplyMapping\":{\"Inputs\":[\"node-1723110637309\"],\"Mapping\":[{\"Dropped\":false,\"FromPath\":[\"year\"],\"FromType\":\"string\",\"ToKey\":\"year\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"industry_aggregation_nzsioc\"],\"FromType\":\"string\",\"ToKey\":\"industry_aggregation_nzsioc\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"industry_code_nzsioc\"],\"FromType\":\"string\",\"ToKey\":\"industry_code_nzsioc\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"industry_name_nzsioc\"],\"FromType\":\"string\",\"ToKey\":\"industry_name_nzsioc\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"units\"],\"FromType\":\"string\",\"ToKey\":\"units\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"variable_code\"],\"FromType\":\"string\",\"ToKey\":\"variable_code\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"variable_name\"],\"FromType\":\"string\",\"ToKey\":\"variable_name\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"variable_category\"],\"FromType\":\"string\",\"ToKey\":\"variable_category\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"value\"],\"FromType\":\"string\",\"ToKey\":\"value\",\"ToType\":\"string\"},{\"Dropped\":true,\"FromPath\":[\"industry_code_anzsic06\"],\"FromType\":\"string\",\"ToKey\":\"industry_code_anzsic06\",\"ToType\":\"string\"}],\"Name\":\"Change Schema\"}},\"node-1723111215705\":{\"S3GlueParquetTarget\":{\"AutoDataQuality\":{\"IsEnabled\":false},\"Compression\":\"snappy\",\"Inputs\":[\"node-1723111034658\"],\"Name\":\"Amazon S3\",\"PartitionKeys\":[],\"Path\":\"s3://surajstorage\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "etl",
+    "branch" : "main",
+    "folder" : "Financial-001"
+  }
+}
